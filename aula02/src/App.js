@@ -1,3 +1,4 @@
+import React, {useState, useRef} from 'react'
 import logo from './logo.svg';
 import './App.css';
 import Loja from './components/Loja';
@@ -15,13 +16,19 @@ function Item({item}){
 }
 
 function App() {
+const [mensagem, setMensagem] = useState('');
+const inputRef = useRef(null);
+
   return (
     <div>
-      <ul>
-        {
-          textos.map(x => <Item key={x.id} item={x}/>)
-        }
-      </ul>
+      <label>Nome</label>
+      <input 
+       style={{marginLeft: '10px', marginRight: '10px'}}
+       type='text'
+       ref={inputRef}
+       />
+      <button onClick={() => setMensagem(`Olá ${inputRef.current.value}!`)}>Mostrar</button>
+      <p>{mensagem}</p>
     </div>
   );
 }
